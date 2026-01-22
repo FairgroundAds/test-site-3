@@ -4,7 +4,7 @@ import path from "path";
 const srcDir = "./src";
 const outDir = "./dist";
 const CMS_API_URL = process.env.CMS_API_URL || "https://expd.thefairground.com/api";
-const SITE_DOMAIN = process.env.SITE_DOMAIN || "test-site-3.pages.dev";
+const SITE_DOMAIN = process.env.SITE_DOMAIN || "test-site-3-7ah.pages.dev";
 
 // Fetch placements from CMS API
 async function fetchPlacements() {
