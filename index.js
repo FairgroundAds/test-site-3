@@ -46,8 +46,12 @@ async function fetchPlacements() {
   let html = fs.readFileSync(srcHtml, "utf8");
 
   // Replace each placement variable with content from CMS
-  for (const [key, value] of Object.entries(placements)) {
-    html = html.replaceAll(`${key}`, value || '');
+  // If no content, remove the placeholder entirely
+  const allPlaceholders = ['__NAVIGATION__', '__INCONTENT__', '__SUBFOOTER__'];
+  
+  for (const placeholder of allPlaceholders) {
+    const content = placements[placeholder] || '';
+    html = html.replaceAll(placeholder, content);
   }
 
   // Write to dist
