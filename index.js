@@ -1,9 +1,10 @@
 import fs from "fs";
 import path from "path";
 
+const srcDir = "./src";
 const outDir = "./dist";
 const CMS_API_URL = process.env.CMS_API_URL || "https://expd.thefairground.com/api";
-const SITE_DOMAIN = process.env.SITE_DOMAIN || "expd.thefairground.com";
+const SITE_DOMAIN = process.env.SITE_DOMAIN || "test-site-3.pages.dev";
 
 // Fetch placements from CMS API
 async function fetchPlacements() {
@@ -23,13 +24,6 @@ async function fetchPlacements() {
   }
 }
 
-function walk(dir) {
-  return fs.readdirSync(dir).flatMap(file => {
-    const full = path.join(dir, file);
-    return fs.statSync(full).isDirectory() ? walk(full) : full;
-  });
-}
-
 // Main build process
 (async () => {
   console.log(`Fetching link lists for ${SITE_DOMAIN} from ${CMS_API_URL}...`);
@@ -42,19 +36,24 @@ function walk(dir) {
     console.log(`Found ${Object.keys(placements).length} placement(s):`, Object.keys(placements));
   }
 
-  for (const file of walk(outDir)) {
-    if (!file.endsWith(".html")) continue;
-
-    let html = fs.readFileSync(file, "utf8");
-
-    // Replace each placement variable with content from CMS
-    for (const [key, value] of Object.entries(placements)) {
-      html = html.replaceAll(`${key}`, value || '');
-    }
-
-    fs.writeFileSync(file, html);
-    console.log(`Processed: ${file}`);
+  // Create dist directory if it doesn't exist
+  if (!fs.existsSync(outDir)) {
+    fs.mkdirSync(outDir, { recursive: true });
   }
+
+  // Read the source HTML
+  const srcHtml = path.join(srcDir, "index.html");
+  let html = fs.readFileSync(srcHtml, "utf8");
+
+  // Replace each placement variable with content from CMS
+  for (const [key, value] of Object.entries(placements)) {
+    html = html.replaceAll(`${key}`, value || '');
+  }
+
+  // Write to dist
+  const outHtml = path.join(outDir, "index.html");
+  fs.writeFileSync(outHtml, html);
+  console.log(`Processed: ${srcHtml} -> ${outHtml}`);
   
   console.log("Build complete!");
 })();
