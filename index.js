@@ -32,6 +32,10 @@ async function fetchPlacements() {
   
   const placements = await fetchPlacements();
   
+  console.log('\n=== API RESPONSE ===');
+  console.log(JSON.stringify(placements, null, 2));
+  console.log('===================\n');
+  
   if (Object.keys(placements).length === 0) {
     console.warn("No placements found. Using empty content.");
   } else {
@@ -53,12 +57,22 @@ async function fetchPlacements() {
   
   for (const placeholder of allPlaceholders) {
     const content = placements[placeholder] || '';
+    console.log(`\nReplacing ${placeholder}:`);
+    console.log(`Content length: ${content.length} characters`);
+    console.log(`Preview: ${content.substring(0, 200)}${content.length > 200 ? '...' : ''}`);
     html = html.replaceAll(placeholder, content);
   }
   
   // Replace page title and site name
   html = html.replaceAll('__PAGE_TITLE__', PAGE_TITLE);
   html = html.replaceAll('__SITE_NAME__', SITE_NAME);
+  
+  console.log('\n=== BUILD SUMMARY ===');
+  console.log(`Site: ${SITE_NAME}`);
+  console.log(`Domain: ${SITE_DOMAIN}`);
+  console.log(`Page Title: ${PAGE_TITLE}`);
+  console.log(`Placements processed: ${Object.keys(placements).length}`);
+  console.log('=====================\n');
 
   // Write to dist
   const outHtml = path.join(outDir, "index.html");
