@@ -5,6 +5,8 @@ const srcDir = "./src";
 const outDir = "./dist";
 const CMS_API_URL = process.env.CMS_API_URL || "https://expd.thefairground.com/api";
 const SITE_DOMAIN = process.env.SITE_DOMAIN || "test-site-3-7ah.pages.dev";
+const PAGE_TITLE = "Welcome to Test Site 3";
+const SITE_NAME = "Test Site 3";
 
 // Fetch placements from CMS API
 async function fetchPlacements() {
@@ -53,6 +55,10 @@ async function fetchPlacements() {
     const content = placements[placeholder] || '';
     html = html.replaceAll(placeholder, content);
   }
+  
+  // Replace page title and site name
+  html = html.replaceAll('__PAGE_TITLE__', PAGE_TITLE);
+  html = html.replaceAll('__SITE_NAME__', SITE_NAME);
 
   // Write to dist
   const outHtml = path.join(outDir, "index.html");

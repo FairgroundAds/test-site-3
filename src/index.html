@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test Site 3</title>
+  <title>__PAGE_TITLE__</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50">
@@ -13,10 +13,12 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex items-center">
-          <span class="text-xl font-bold text-gray-800">Test Site 3</span>
+          <span class="text-xl font-bold text-gray-800">__SITE_NAME__</span>
         </div>
-        <div class="flex items-center space-x-4">
-          __NAVIGATION__
+        <div class="flex items-center">
+          <nav class="flex space-x-6">
+            __NAVIGATION__
+          </nav>
         </div>
       </div>
     </div>
@@ -25,7 +27,7 @@
   <!-- Hero Section -->
   <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-      <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to Our Site</h1>
+      <h1 class="text-4xl md:text-6xl font-bold mb-4">__PAGE_TITLE__</h1>
       <p class="text-xl md:text-2xl mb-8">Discover amazing content and resources</p>
       <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
         Get Started
@@ -47,8 +49,7 @@
       </div>
       
       <div class="bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold mb-4 text-gray-800">Related Resources</h2>
-        <div class="space-y-2">
+        <div class="flex flex-col space-y-2">
           __INCONTENT__
         </div>
       </div>
@@ -66,21 +67,30 @@
     </div>
   </main>
 
+  <!-- Subfooter Links Section -->
+  <div class="bg-gray-700 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap justify-center gap-4 text-center">
+        __SUBFOOTER__
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white mt-12">
+  <footer class="bg-gray-800 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="grid md:grid-cols-3 gap-8">
         <div>
-          <h3 class="text-lg font-semibold mb-4">Test Site 3</h3>
+          <h3 class="text-lg font-semibold mb-4">__SITE_NAME__</h3>
           <p class="text-gray-400">
             A demonstration of dynamic link management across static sites.
           </p>
         </div>
         <div>
-          <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-          <div class="space-y-2">
-            __SUBFOOTER__
-          </div>
+          <h3 class="text-lg font-semibold mb-4">About</h3>
+          <p class="text-gray-400">
+            Powered by Cloudflare Pages and a headless CMS for dynamic link management.
+          </p>
         </div>
         <div>
           <h3 class="text-lg font-semibold mb-4">Contact</h3>
@@ -91,7 +101,7 @@
         </div>
       </div>
       <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-        <p>&copy; 2026 Test Site 3. All rights reserved.</p>
+        <p>&copy; 2026 __SITE_NAME__. All rights reserved.</p>
       </div>
     </div>
   </footer>
